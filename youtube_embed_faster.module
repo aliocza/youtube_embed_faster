@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Implement hook_init().
+ */
+function youtube_embed_faster_init() {
+  $pathModule = drupal_get_path('module', 'youtube_embed_faster');
+  drupal_add_js(drupal_get_path('module', 'youtube_embed_faster') . '/js/youtube_embed_faster.js');
+  drupal_add_js(array('youtube_embed_faster' => array('basepath' => '/'.$pathModule)), 'setting');
+  drupal_add_css(drupal_get_path('module', 'youtube_embed_faster') . '/css/youtube_embed_faster.css');
+}
+
+
+function youtube_embed_faster_ckeditor_plugin()
+{
+    $module_path = drupal_get_path('module', 'youtube_embed_faster');
+    $plugins     = array();
+
+    $plugins['youtube_faster'] = array(
+        'name'    => 'youtube_faster',
+        'desc'    => t('Youtube Faster'),
+        'path'    => $module_path . '/js/plugins/youtube_faster/',
+        'default' => 't',
+        'buttons' => array(
+            'Youtube_faster' => array(
+                'label' => 'Youtube Faster',
+                'icon'  => 'icons/youtube_faster.png',
+            ),
+        ),
+    );
+
+    return $plugins;
+}
